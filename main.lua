@@ -1,7 +1,7 @@
 ---@diagnostic disable: undefined-global
 
 -- Const da velocidade de movimento
-local MOVEMENT_SPEED = 6000
+local MOVEMENT_SPEED = 300
 
 -- Inicia/prepara o jogo 
 function love.load()
@@ -65,29 +65,28 @@ function love.update(dt) -- dt = delta time, tempo decorrido entre frames
     --[[player.x = math.max(0, math.min(player.x, love.graphics.getWidth()))
     player.y = math.max(0, math.min(player.y, love.graphics.getHeight()))]]
 
-    local isMoving = false -- auto explicativo
+    local isMoving = false
 
-    local vx = 0
-    local vy = 0
+    local vx, vy = 0, 0
 
-    if love.keyboard.isDown("right") then
-        vx = (dt * MOVEMENT_SPEED)
-        player.anim = player.animations.right -- muda a animação
+    if love.keyboard.isDown('right', 'left', 'up', 'down') then
         isMoving = true
-    elseif love.keyboard.isDown("left") then
-        vx = (dt * MOVEMENT_SPEED) * -1
-        player.anim = player.animations.left
-        isMoving = true
+
+        if love.keyboard.isDown('right') then
+            vx, player.anim = 1, player.animations.right
+        elseif love.keyboard.isDown('left') then
+            vx, player.anim = -1, player.animations.left
+        elseif love.keyboard.isDown('up') then
+            vy, player.anim = -1, player.animations.up
+        elseif love.keyboard.isDown('down') then
+            vy, player.anim = 1, player.animations.down
+        end
     end
 
-    if love.keyboard.isDown("up") then
-        vy = (dt * MOVEMENT_SPEED) * -1
-        player.anim = player.animations.up
-        isMoving = true
-    elseif love.keyboard.isDown("down") then
-        vy = (dt * MOVEMENT_SPEED)
-        player.anim = player.animations.down
-        isMoving = true
+    local lenght = math.sqrt(vx*vx + vy*vy)
+    if lenght > 0 then
+        vx = vx / lenght * MOVEMENT_SPEED
+        vy = vy / lenght * MOVEMENT_SPEED
     end
 
     player.colision:setLinearVelocity(vx, vy)
@@ -142,16 +141,19 @@ function love.draw()
         --world:draw()
     cam:detach()
 
+    -- Hud (fica fora da câmera)
     love.graphics.print("FPS: " .. love.timer.getFPS(), 5, 30)
     love.graphics.print("X: " .. math.floor(player.x) .. " Y: " .. math.floor(player.y), 5, 10)
 end
 
+-- aciona quando uma tecla for apertada
 function love.keypressed(key)
     if key == 'space' then
         sounds.blip:play()
     end
 
     if key == 'r' then
+        -- reinicia o jogo
         love.event.quit('restart')
     end
 end
