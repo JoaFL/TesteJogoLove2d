@@ -1,0 +1,5 @@
+{
+    "pixelbyte.love2d.path": "E:\\Program Files\\LOVE\\love.exe",
+    "Lua.runtime.version": "LuaJIT",
+    "Lua.diagnostics.globals": ["love"]
+}
