@@ -8,7 +8,7 @@ Utilização de bibliotecas externas:
 * Windfield: Física  
 * Anim8: Animações  
 * Hump: Câmera  
- *Simple Tiled Implementation: TileMap
+* Simple Tiled Implementation: TileMap
 
 ### Tecnologias Utilizadas:  
 Lua;  
