@@ -5,10 +5,10 @@ Projeto inicial para testes e praticas utilizando o framework Love2d e linguagem
 Ciclo de Vida: Entendimento das funções love.load, love.update e love.draw;  
 Manipulação de Sprites: Carregamento e renderização de imagens em tela;  
 Utilização de bibliotecas externas:  
-  Windfield: Física  
-  Anim8: Animações  
-  Hump: Câmera  
-  Simple Tiled Implementation: TileMap
+  *Windfield: Física  
+  *Anim8: Animações  
+  *Hump: Câmera  
+  *Simple Tiled Implementation: TileMap
 
 ### Tecnologias Utilizadas:  
 Lua;  
